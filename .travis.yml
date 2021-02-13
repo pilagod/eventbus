@@ -7,7 +7,9 @@ env:
   - GO111MODULE=on
 
 install:
+  - go get github.com/mattn/goveralls
   - go mod download
 
 script:
-  - make test
+  - go test -v -covermode=count -coverprofile=c.out ./eventbus
+  - $GOPATH/bin/goveralls -coverprofile=c.out -service=travis-ci
