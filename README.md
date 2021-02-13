@@ -53,9 +53,11 @@ type EventHandler struct {}
 func (h *EventHandler) Handle(event eventbus.Event) error {
     e, ok := event.(Event)
     if !ok {
+        // just ignore this event
         return nil
     }
     fmt.Println(e.Message)
+    return nil
 }
 
 es := eventbus.GetEventSubscriber() // GetEventSubscriber will panic if event bus hasn't setup
