@@ -1,4 +1,4 @@
-# go-eventbus [![Build Status](https://travis-ci.com/pilagod/go-eventbus.svg?branch=master)](https://travis-ci.com/pilagod/go-eventbus) [![Coverage Status](https://coveralls.io/repos/github/pilagod/go-eventbus/badge.svg?branch=master)](https://coveralls.io/github/pilagod/go-eventbus?branch=master)
+# go-eventbus [![Build Status](https://travis-ci.com/pilagod/go-eventbus.svg?branch=master)](https://travis-ci.com/pilagod/go-eventbus) [![Coverage Status](https://coveralls.io/repos/github/pilagod/go-eventbus/badge.svg?branch=master)](https://coveralls.io/github/pilagod/go-eventbus?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/pilagod/go-eventbus)](https://goreportcard.com/report/github.com/pilagod/go-eventbus)
 
 Event bus for Go, leveraging [ants](https://github.com/panjf2000/ants) for worker pool management.
 
