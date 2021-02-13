@@ -69,6 +69,28 @@ es.Subscribe(Event{}, &EventHandler{})
 es.SubscribeAll(&EventHandler{})
 ```
 
+You can hook common handler logic by `Use` method:
+
+```go
+func LogHandler(h eventbus.EventHandler) eventbus.EventHandler {
+    return &logHandler{h}
+}
+
+type logHandler struct {
+    eventbus.EventHandler
+}
+
+func (h *logHandler) Handle(event eventbus.Event) error {
+    fmt.Println("Log event: %v", event)
+    return h.EventHandler.Handle(event)
+}
+
+es := eventbus.GetEventSubscriber()
+
+// Hook logger for handler
+es.Use(LogHandler)
+```
+
 ### Event Publisher
 
 ```go

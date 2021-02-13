@@ -124,10 +124,12 @@ func (d *eventDecorator) Handle(e Event) error {
 	ev.Message = "Decorated " + ev.Message
 	return d.handler.Handle(ev)
 }
+
 func (s *eventBusSuite) TestUse() {
 	var wg sync.WaitGroup
 
 	es := GetEventSubscriber()
+
 	es.Use(func(h EventHandler) EventHandler {
 		return &eventDecorator{handler: h}
 	})
