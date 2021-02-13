@@ -40,13 +40,9 @@ func main() {
 ### Event Subscriber
 
 ```go
-// Event
-
 type Event struct {
     Message string
 }
-
-// Event handler
 
 type EventHandler struct {}
 
@@ -94,8 +90,6 @@ es.Use(LogHandler)
 ### Event Publisher
 
 ```go
-// Event
-
 type Event struct {
     Message string
 }
