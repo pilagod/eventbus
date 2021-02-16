@@ -116,12 +116,13 @@ func (s *eventBusSuite) TestSubscribeAll() {
 }
 
 type eventDecorator struct {
-	handler EventHandler
+	addnMessage string
+	handler     EventHandler
 }
 
 func (d *eventDecorator) Handle(e Event) error {
 	ev := e.(event)
-	ev.Message = "Decorated " + ev.Message
+	ev.Message = ev.Message + " " + d.addnMessage
 	return d.handler.Handle(ev)
 }
 
@@ -131,7 +132,16 @@ func (s *eventBusSuite) TestUse() {
 	es := GetEventSubscriber()
 
 	es.Use(func(h EventHandler) EventHandler {
-		return &eventDecorator{handler: h}
+		return &eventDecorator{
+			addnMessage: "First",
+			handler:     h,
+		}
+	})
+	es.Use(func(h EventHandler) EventHandler {
+		return &eventDecorator{
+			addnMessage: "Second",
+			handler:     h,
+		}
 	})
 
 	h := newEventHandler(&wg)
@@ -148,7 +158,7 @@ func (s *eventBusSuite) TestUse() {
 
 	s.Len(h.Events, 1)
 	got, _ := h.Events[0].(event)
-	s.Contains(got.Message, "Decorated")
+	s.Equal("Hello First Second", got.Message)
 }
 
 // event for test

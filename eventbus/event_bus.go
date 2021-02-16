@@ -78,7 +78,9 @@ func (eb *eventBus) SubscribeAll(handlers ...EventHandler) {
 }
 
 func (eb *eventBus) Use(decorator EventHandlerDecorator) {
-	eb.decorators = append(eb.decorators, decorator)
+	eb.decorators = append(eb.decorators, nil)
+	copy(eb.decorators[1:], eb.decorators)
+	eb.decorators[0] = decorator
 }
 
 // util
